@@ -1,0 +1,25 @@
+utilizzo GoBackN e configurazione 2 nodi
+Saboteur_t.cc e hh andavano modificati nel loro percorso del protocollo e ricompilato il make di scnsl.
+data_types.hh è stato modificato ma non usato.
+------------------------------------------------------------------------------------------------
+Viene modificato il Saboteur_t.cc (trunk/src/protocols/saboteur) presente nel SCNSL per aggiungere oltre a varaizioni del bitErrorRate anche il dealy e la perdita di pacchetti, vengono raccolte le modifiche effettuate e i risultati in modificato.txt.
+Oltre a queste prove viene anche guastato il codice del protocolo come negli esercizi precedenti.
+------------------------------------------------------------------------------------------------
+Il delay messo sia in 
+Saboteur_t::errorcode_t Saboteur_t::send( const Packet_t & p)
+
+che in :
+Saboteur_t::errorcode_t Saboteur_t::receive( const Packet_t & p)
+
+fa variare la simulazione all'aumentare del ritardo, rispetto a impostare direttamente il ritardo di canale nel main.cc con scnsl, probabilmente perchè tread che la chiama va in wait (e nel caso goBackN ad esempio, altri pacchetti potrebbero intanto partire)
+
+--------------------------------------------------------------------------------------------------
+Nel file data_types.hh (trunk/include/scnsl/core) sono messe le implementazioni necessaria a passare i valori dal main al sabotatore per il delay, bitErrorRate e PacketLossRate.
+
+bisogna ampliare il caso, ora presente solo per il bitErrorRate da cui nel main si fa:
+double inject(const Scnsl::Core::node_properties_t & /*sp*/, const Scnsl::Core::node_properties_t & /*rp*/)
+{
+    return 0.0001;
+}
+
+Anche per delay e PacketLossRate passandogli i valori da usare.

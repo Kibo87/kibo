@@ -1,0 +1,272 @@
+Usare:diff -s uscita.out uscitaN.out
+
+0)uscita.out arriva a 35
+uscita base con tutto deff 
+//ccoms1.bitErrorRateFunction = inject;
+----------------------------------------------------------------
+Cambio bitRateError:
+1) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.00001;
+base resta a 35.
+2) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0001;
+base diventa 34.
+3) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0003;
+base diventa 35.
+4) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0006;
+base diventa 34.
+5) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0007;
+base diventa 32.
+6) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0008;
+base diventa 35.
+7) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0009;
+base diventa 24.
+8) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.001;
+base diventa 21.
+9) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0015;
+base diventa 33.
+10) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.0018;
+base diventa 26.
+11) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.003;
+base diventa 29.
+12) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.006;
+base diventa 15.
+13) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.009;
+base diventa 15.
+14) main.cc, riga 19, uscita1 con new_bit_error_rate return 0.012;
+base diventa 10.
+-------------------------------------------------------------------
+Cambio ritardo:
+15) Saboteur_t.cc, riga 89, con Delay 10000;
+base resta 35.
+16) Saboteur_t.cc, riga 89, con Delay 16000;
+base diventa 34.
+17) Saboteur_t.cc, riga 89, con Delay 25000;
+base diventa 34.
+18) Saboteur_t.cc, riga 89, con Delay 30000;
+base diventa 34.
+19) Saboteur_t.cc, riga 89, con Delay 40000;
+base diventa 34.
+20) Saboteur_t.cc, riga 89, con Delay 50000;
+base diventa 33.
+21) Saboteur_t.cc, riga 89, con Delay 70000;
+base diventa 33.
+22) Saboteur_t.cc, riga 89, con Delay 90000;
+base diventa 33.
+23) Saboteur_t.cc, riga 89, con Delay 100000;
+base diventa 33.
+24) Saboteur_t.cc, riga 89, con Delay 150000;
+base diventa 31.
+25) Saboteur_t.cc, riga 89, con Delay 200000;
+base diventa 27.
+26) Saboteur_t.cc, riga 89, con Delay 300000;
+base diventa 13.
+27) Saboteur_t.cc, riga 89, con Delay 400000;
+base diventa 10.
+28) Saboteur_t.cc, riga 89, con Delay 500000;
+base diventa 7.
+29) Saboteur_t.cc, riga 89, con Delay 250000;
+base diventa 16.
+30) Saboteur_t.cc, riga 89, con Delay 275000;
+base diventa 14.
+31) Saboteur_t.cc, riga 89, con Delay 225000;
+base diventa 19.
+---------------------------------------------------------
+Cambio numero pacchetti persi
+32) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.01;
+base resta 35.
+33) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.05;
+base resta 35.
+34) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.1;
+base resta 35.
+35) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.15;
+base diventa 30.
+36) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.2;
+base diventa 30.
+37) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.25;
+base diventa 23.
+38) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.3;
+base diventa 23.
+39) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.35;
+base diventa 16.
+40) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.4;
+base diventa 16.
+41) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.45;
+base diventa 12.
+42) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.5;
+base diventa 12.
+43) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.55;
+base diventa 12.
+44) Saboteur_t.cc, riga 185, con new_packet_loss_rate 0.65;
+base diventa 8.
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Modifiche + bitError:
+1= 1) gbn_manager.cc, riga 8, base(0), da 1 a 0.
+45) deff, 33
+46) 0.0001, 32
+47) 0.0007, 31
+48) 0.0009, 27
+49) 0.0015, 28
+50) 0.003, 24
+51) 0.006, 21
+52) 0.009, 15
+53) 0.012, 10
+-----------------------------------------------------------------
+6= 6) gbn_manager.cc, riga 81, da "if((nextSN <= maxSN) && (nextAck < maxSN))" a "if((nextSN < maxSN) && (nextAck < maxSN))"
+54) deff, 35
+55) 0.0001, 34
+56) 0.0007, 25
+57) 0.0009, 24
+58) 0.0015, 33
+59) 0.003, 25
+60) 0.006, 14
+61) 0.009, 8
+62) 0.012, 7
+-----------------------------------------------------------------
+8= 8) gbn_manager.cc, riga 108, da "if (!payloads.empty() && maxSN <= nextSNTemp)" a "if (!payloads.empty() && maxSN < nextSNTemp)"
+63) deff, 32
+64) 0.0001, 32
+65) 0.0007, 23
+66) 0.0009, 22
+67) 0.0015, 6
+68) 0.003, 23
+69) 0.006, 16
+70) 0.009, 17
+71) 0.012, 16
+-----------------------------------------------------------------
+9= 9) gbn_manager.cc, riga 244, da "ack->seqNumber = nextSNack-1" a "ack->seqNumber = nextSNack"
+72) deff, 35
+73) 0.0001, 34
+74) 0.0007, 15
+75) 0.0009, 15
+76) 0.0015, 33
+77) 0.003, 18
+78) 0.006, 4
+79) 0.009, 4
+80) 0.012, 2
+-----------------------------------------------------------------
+10= 10) gbn_manager.cc, riga 232, da "ack->sourceId = taskId" a "ack->sourceId = pack->sourceId"
+81) deff, 35
+82) 0.0001, 34
+83) 0.0007, 
+84) 0.0009, 
+85) 0.0015, 
+86) 0.003, 29
+87) 0.006, 
+88) 0.009, 
+89) 0.012, 10
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Modifiche + pacchetto perso:
+1= 1) gbn_manager.cc, riga 8, base(0), da 1 a 0.
+90) deff, 33
+91) 0.10, 33
+92) 0.15, 29
+93) 0.25, 20
+94) 0.35, 11
+95) 0.40, 11
+96) 0.45, 11
+97) 0.55, 10
+98) 0.65, 7
+-----------------------------------------------------------------
+6= 6) gbn_manager.cc, riga 81, da "if((nextSN <= maxSN) && (nextAck < maxSN))" a "if((nextSN < maxSN) && (nextAck < maxSN))"
+99) deff, 35
+100) 0.10, 35
+101) 0.15, 20
+102) 0.25, 20
+103) 0.35, 14
+104) 0.40, 14
+105) 0.45, 11
+106) 0.55, 11
+107) 0.65, 6
+-----------------------------------------------------------------
+8= 8) gbn_manager.cc, riga 108, da "if (!payloads.empty() && maxSN <= nextSNTemp)" a "if (!payloads.empty() && maxSN < nextSNTemp)"
+108) deff, 32
+109) 0.10, 32
+110) 0.15, 30
+111) 0.25, 28
+112) 0.35, 21
+113) 0.40, 21
+114) 0.45, 15
+115) 0.55, 12
+116) 0.65, 8
+-----------------------------------------------------------------
+9= 9) gbn_manager.cc, riga 244, da "ack->seqNumber = nextSNack-1" a "ack->seqNumber = nextSNack"
+117) deff, 35
+118) 0.10, 35
+119) 0.15, 11
+120) 0.25, 14
+121) 0.35, 6
+122) 0.40, 6
+123) 0.45, 6
+124) 0.55, 6
+125) 0.65, 3
+-----------------------------------------------------------------
+10= 10) gbn_manager.cc, riga 232, da "ack->sourceId = taskId" a "ack->sourceId = pack->sourceId"
+126) deff, 35
+127) 0.10, 35
+128) 0.15, 
+129) 0.25, 
+130) 0.35, 
+131) 0.40, 
+132) 0.45, 12
+133) 0.55, 
+134) 0.65, 8
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Cambio ritardo nel SEND:
+134) Saboteur_t.cc, riga 89, con Delay 10000;
+base resta 33.
+135) Saboteur_t.cc, riga 89, con Delay 16000;
+base diventa 33.
+136) Saboteur_t.cc, riga 89, con Delay 25000;
+base diventa 32.
+137) Saboteur_t.cc, riga 89, con Delay 30000;
+base diventa 31.
+138) Saboteur_t.cc, riga 89, con Delay 40000;
+base diventa 25.
+139) Saboteur_t.cc, riga 89, con Delay 50000;
+base diventa 21.
+140) Saboteur_t.cc, riga 89, con Delay 70000;
+base diventa 17.
+141) Saboteur_t.cc, riga 89, con Delay 90000;
+base diventa 17.
+142) Saboteur_t.cc, riga 89, con Delay 100000;
+base diventa 16.
+143) Saboteur_t.cc, riga 89, con Delay 150000;
+base diventa 12.
+144) Saboteur_t.cc, riga 89, con Delay 200000;
+base diventa 11.
+145) Saboteur_t.cc, riga 89, con Delay 300000;
+base diventa 7.
+146) Saboteur_t.cc, riga 89, con Delay 400000;
+base diventa 7.
+147) Saboteur_t.cc, riga 89, con Delay 500000;
+base diventa 6.
+148) Saboteur_t.cc, riga 89, con Delay 250000;
+base diventa 16.
+149) Saboteur_t.cc, riga 89, con Delay 275000;
+base diventa 7.
+150) Saboteur_t.cc, riga 89, con Delay 225000;
+base diventa 9.
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+//new_bit_error_rate
+double new_packet_loss_rate = 0;
+double new_value_delay = 0; //base 1000 sc_core::SC_US (provare +19 000)
+
+//inserire white nella funzione che riceve ritardo
+if (new_value_delay != 0)
+{
+    wait(new_value_delay);
+}
+
+//definire quanti pacchetti vanno persi
+r = (double)(rand()) / ((double)RAND_MAX + 1.0);
+if (r<new_packet_loss_rate)
+{
+    injectedPacket=NULL;
+}
+-----------------------------------------------------------------
+

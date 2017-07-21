@@ -1,0 +1,53 @@
+- STRUTTURE DATI DI UN TASK
+    - Coda dei pacchetti da inviare.
+    - Coda degli ack da inviare.
+    - Mappa che tiene traccia dello stato di comunicazione con gli altri task, mediante il protocollo selezionato.
+
+FUNCTION 1:
+    - Misura la temperatura e la invia a Pippo. -> Butta un packet_t nella coda dei DATI.
+
+SEND
+    - Se c'è un ACK da inviare nella coda degli ACK da inviare, invia l'ACK.
+    - Se c'è un DATO da inviare nella coda dei dati da inviare, invia il dato.
+
+RECEIVE
+    - Se ricevo un ACK,
+        - reperisco nella mappa che mi tiene traccia delle comunicazioni con i miei Vicini e eseguo tutto quello che va fatto quando ricevo un ACK.
+    - Se ricevo un pacchetto DATI,
+        - ma questo pacchetto non è per me:
+            - Aggiungo l'ACK a chi mi aveva mando il pacchetto alla coda degli ACK.
+            - Aggiungo il DATO alla lista dei DATI da inviare.
+        - allora devo:
+            - Aggiungo l'ACK a chi mi aveva mando il pacchetto alla coda degli ACK.
+            - Me ne frego del pacchetto.
+			
+------------------------------------------------------------------------------------------------
+
+
+FUNCTION 1 (specifica):
+    -Misura la temperatura e la invia a Pippo. 
+		-metto mittente,destinatario e i dati
+		-Butta un packet_t nella coda dei DATI del nodo in cui sono.
+
+SEND
+	-Se c'è un ACK da inviare nella coda degli ACK da inviare, invia l'ACK.
+		-"apro" in Ack_t * a
+		-metto destinatario/mittente del proxy uso mappa
+		-spedisco (vedere Centar vecchio + Central nuovo)
+	-Se c'è un DATO da inviare nella coda dei dati da inviare, invia il dato.
+		-"apro" in Payload_t * p
+		-metto destinatario/mittente del proxy uso mappa
+		-spedisco (vedere Central vecchio + Local nuovo)
+		
+RECEIVE
+	-"apro" in Payload_t * p
+	-Se ricevo un ACK,
+		-aggiorno variabili del caso (procedura Local nuovo->transport)
+	-Se ricevo un pacchetto DATI, (vedere central vecchio)
+		-se in ordine corretto aggiorno variabili del caso (vedere Central nuovo)
+		-metto ack in coda nuovo o  " vecchio "se avevo riccevuto dato sbagliato
+		-dati per me 		
+			-in teoria li uso (??? chiamo un metodo che lascio vuoto???)
+		-dati per altri
+			-mi setto come ultimo mittente
+			-metto dati in coda

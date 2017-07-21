@@ -1,0 +1,92 @@
+/// @file
+/// A TLM task.
+
+#include "CentralTask.hh"
+
+CentralTask::CentralTask(
+    sc_core::sc_module_name modulename,
+    const task_id_t id,
+    Scnsl::Core::Node_t * n,
+    const size_t proxies) :
+    Scnsl::Tlm::TlmTask_if_t(modulename, id, n, proxies),
+    taskId(id)
+{
+    SC_THREAD(writingProcess);
+}
+
+CentralTask::~CentralTask() throw ()
+{
+    // Nothing to do.
+}
+
+void CentralTask::writingProcess()
+{
+        while (true)
+        {
+                if(manager.stop){//Invio l'ack
+
+                        std::cout << "[" << name() << "]  SENDING ";
+                        std::cout << "\t";
+                        std::cout << "\tTo " << manager.ack->targetId;
+                        std::cout << "\tACK ";
+                        std::cout << "\tSize " << sizeof(Payload_t);
+                        std::cout << "\t  Sequence Number " << manager.ack->seqNumber;
+                        std::cout << "\t(" << sc_core::sc_time_stamp() << ")" << std::endl;
+std::cout << "\tMANAGER\t"<<manager.routing[manager.ack->targetId]<<"\t";
+
+                        const tlm_taskproxy_id_t tp = manager.routing[manager.ack->targetId];
+                        TlmTask_if_t::send(tp, reinterpret_cast<byte_t *>(manager.ack), sizeof(Payload_t));
+                        manager.stop = false;
+
+                        wait(50, sc_core::SC_MS);
+                }else{
+                        wait(50, sc_core::SC_MS);
+                }
+    }
+}
+
+void CentralTask::b_transport(tlm::tlm_generic_payload & payload, sc_core::sc_time & t)
+{
+        if (payload.get_command() == Scnsl::Tlm::tlm_command_t(Scnsl::Tlm::PACKET_COMMAND))
+        {
+                //Recupero il pacchetto ricevuto
+                Payload_t * p = reinterpret_cast<Payload_t *>(payload.get_data_ptr());
+                std::cout << "[" << name() << "]  RECEIVED ";
+                std::cout << "\tFrom " << p->sourceId;
+                std::cout << "\t";
+                std::cout << "\tData " << p->data;
+                std::cout << "\tSize " << sizeof(Payload_t);
+                std::cout << "\t  Sequence Number " << p->seqNumber ;
+                std::cout << "\t(" << sc_core::sc_time_stamp() << ")" << std::endl;
+                //Caso in cui arriva il pacchetto con SN che mi aspettavo
+                if(manager.nextSN == p->seqNumber)
+                {
+                        //Setup manager.ack packet
+                        manager.ack = static_cast<Payload_t *>(malloc(sizeof(Payload_t) * sizeof(manager.ack)));
+                        manager.ack->type = 'a';
+                        manager.ack->seqNumber = manager.nextSN;
+                        manager.ack->sourceId = taskId;
+                        manager.ack->targetId = p->sourceId;
+                        manager.nextSN++;
+                        manager.stop = true;
+                }
+                //Caso in cui arriva un pacchetto duplicato
+                else{
+                        manager.ack = static_cast<Payload_t *>(malloc(sizeof(Payload_t) * sizeof(manager.ack)));
+                        manager.ack->type = 'a';
+                        manager.ack->seqNumber = manager.nextSN-1;
+                        manager.ack->sourceId = taskId;
+                        manager.ack->targetId = p->sourceId;
+
+                        manager.stop = true;
+                }
+    }
+    else if (payload.get_command() == Scnsl::Tlm::tlm_command_t(Scnsl::Tlm::CARRIER_COMMAND))
+    {
+        //std::cout << "[" << name() << "]  RECEIVED CARRIER_COMMAND\n";
+    }
+    else
+    {
+        //std::cout << "[" << name() << "]  RECEIVED SOMETHING\n";
+    }
+}

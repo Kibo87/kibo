@@ -1,0 +1,41 @@
+
+class GoBackNManager
+{
+public:
+    uint32_t destination;
+    // GBN Variables Send.
+    struct PacketStatusInformation
+    {
+            char seqNToData;
+            bool seqNToAcked;
+            sc_core::sc_time sendingTime;
+            sc_core::sc_time ackReceivedTime;
+    } PacketStatus;
+    //mappa per assocciare le caratteristiche del pacchetto al corrispondente SN
+    std::map<int, PacketStatusInformation> StatusMap;
+    //variabile contenente il SN del più vecchio pacchetto non confermato
+    int base = 1;
+    //variabile contenente il SN del prossimo pacchetto da trasmettere
+    int nextSN = 1;
+
+    int nextAck = 1;
+    //Variabile settata a false, usata per gestire il reinvio di pacchetti
+    bool resend = false;
+    //variabile temporanea utilizzata nella procedura per gestire il reinvio della finestra di pacchetti
+    int nextSNTemp = 1;
+
+    // GBN Variables Receive.
+
+    // Routing table.
+    std::map<uint32_t, uint32_t> routing;
+
+    GoBackNManager()
+    {
+
+    }
+
+    ~GoBackNManager()
+    {
+
+    }
+};

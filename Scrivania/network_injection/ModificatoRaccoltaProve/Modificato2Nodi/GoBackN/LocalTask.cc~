@@ -1,0 +1,147 @@
+/// @file
+/// A TLM task.
+
+#include "LocalTask.hh"
+
+LocalTask::LocalTask(
+        sc_core::sc_module_name modulename,
+        const task_id_t id,
+        Scnsl::Core::Node_t * n,
+        const size_t proxies) :
+        Scnsl::Tlm::TlmTask_if_t(modulename, id, n, proxies),
+        manager(),
+        taskId(id)
+{
+        SC_THREAD(writingProcess);
+}
+
+LocalTask::~LocalTask() throw ()
+{
+    // Nothing to do.
+}
+
+void LocalTask::writingProcess()
+{
+        sc_core::sc_time timeOut (600000, sc_core::SC_US);
+        //Creo il pacchetto che verrà inizializzato più avanti, al momente dell'invio
+        Payload_t * p = static_cast<Payload_t *>(malloc(sizeof(Payload_t) * sizeof(p)));
+
+        while (true)
+        {
+                //controllo timeout
+                if(sc_core::sc_time_stamp() > (manager.StatusMap[manager.base].sendingTime + timeOut)){
+                        std::cout << "\n\t\t@@@@ timeout " << manager.base << "@@@@" << std::endl;
+//                        manager.nextSNTemp = manager.nextSN;
+                        manager.nextSN = manager.base;
+                        manager.nextSNTemp = manager.base+manager.Ws;
+                        std::cout << "\t\tnextSNTemp : " << manager.nextSNTemp << ", manager.nextSN : " << manager.nextSN << "\n" << std::endl;
+                }
+
+                //Preparo il pacchetto per l'invio
+                if(manager.nextSN < manager.base + manager.Ws)
+                {
+                        if(manager.nextSN <= manager.nextSNTemp - 1)
+                        {
+                                Payload_t * p = static_cast<Payload_t *>(malloc(sizeof(Payload_t) * sizeof(p)));
+                                p->type = 'p';
+                                p->sourceId = taskId;
+                                p->targetId = 2;
+                                p->data = manager.StatusMap[manager.nextSN].seqNToData;
+                                p->seqNumber = manager.nextSN;
+
+                                //Stampo le informazioni relative al pacchetto che sto per inviare
+                                std::cout << "[" << name() << "]   SENDING ";
+                                std::cout << "\t";
+                                std::cout << "\tTo " << p->targetId;
+                                std::cout << "\tData " << p->data;
+                                std::cout << "\tSize " << sizeof(Payload_t);
+                                std::cout << "\t  Sequence Number " << p->seqNumber;
+                                std::cout << "\t(" << sc_core::sc_time_stamp() << ")" << std::endl;
+                                manager.StatusMap[manager.nextSN].sendingTime = sc_core::sc_time_stamp();
+std::cout << "\tmanager.routing0\t "<<manager.routing[0]<< "\tmanager.routing1\t "<<manager.routing[1];
+                                //Invio il pacchetto creato
+                                const tlm_taskproxy_id_t tp = manager.routing[p->targetId];
+                                TlmTask_if_t::send(tp, reinterpret_cast<byte_t *>(p), sizeof(Payload_t));
+                                manager.nextSN++;
+                        }
+                        else{
+                                // Prepare the payload.
+
+                                p->type = 'p';
+                                p->sourceId = taskId;
+                                p->targetId = 2;
+                                p->data = '!' + (rand() % 14);
+                                p->seqNumber = manager.nextSN;
+                                //Inizializzo la struct che conterrà le informazioni relative al pacchetto da inviare
+                                manager.PacketStatus.seqNToData = p->data;
+                                manager.PacketStatus.seqNToAcked = false;
+                                manager.PacketStatus.sendingTime = sc_core::sc_time_stamp();
+                                manager.StatusMap.insert(std::pair<int,GoBackNManager::PacketStatusInformation>(manager.nextSN, manager.PacketStatus));
+                                //Stampo le informazioni relative al pacchetto che sto per inviare
+                                std::cout << "[" << name() << "]   SENDING ";
+                                std::cout << "\t";
+                                std::cout << "\tTo " << p->targetId;
+                                std::cout << "\tData " << p->data;
+                                std::cout << "\tSize " << sizeof(Payload_t);
+                                std::cout << "\t  Sequence Number " << p->seqNumber;
+                                std::cout << "\t(" << sc_core::sc_time_stamp() << ")" << std::endl;
+
+                                //Invio il pacchetto creato
+                                const tlm_taskproxy_id_t tp = manager.routing[p->targetId];
+                                TlmTask_if_t::send(tp, reinterpret_cast<byte_t *>(p), sizeof(Payload_t));
+                                manager.nextSN++;
+                                std::cout << "\n\t\tBASE : " << manager.base << "\tNEXTSN : " << manager.nextSN << "\n" << std::endl;
+                        }
+                }
+                wait(100, sc_core::SC_US);//Attendo 100us
+        }
+}
+
+void LocalTask::b_transport(tlm::tlm_generic_payload & payload, sc_core::sc_time & t)
+{
+        if (payload.get_command() == Scnsl::Tlm::tlm_command_t(Scnsl::Tlm::PACKET_COMMAND))
+        {
+                sc_core::sc_time timeOut (600000, sc_core::SC_US);
+                Payload_t * a =  reinterpret_cast<Payload_t *>(payload.get_data_ptr());//Recupero il pacchetto di ack
+
+//                if(manager.nextAck == a->seqNumber && a->type == 'a')
+//                if(manager.nextAck == a->seqNumber)
+                if(manager.nextAck <= a->seqNumber)
+                {
+                        std::cout << "[" << name() << "]   RECEIVED ";
+                        std::cout << "\tFrom " << a->sourceId;
+                        std::cout << "\t";
+                        std::cout << "\tACK ";
+                        std::cout << "\tSize " << sizeof(Payload_t);
+                        std::cout << "\t  Sequence Number " << a->seqNumber;
+                        std::cout << "\t(" << sc_core::sc_time_stamp() << ")" << std::endl;
+                        //Viene confermato il pacchetto che mi aspettavo, quindi posso incrementare la variabile manager.base
+                        /*std::map<int,manager.PacketStatusInformation>::iterator it;
+                        it = manager.StatusMap.find(a->seqNumber);
+                        it->second.seqNToAcked = true;
+                        it->second.ackReceivedTime = sc_core::sc_time_stamp();*/
+                        manager.base++;
+                        //manager.nextAck++;
+                        manager.nextAck=a->seqNumber;
+                        manager.StatusMap[manager.nextAck].seqNToAcked = true;
+                        manager.StatusMap[manager.nextAck].ackReceivedTime = sc_core::sc_time_stamp();
+
+                        std::cout << "\n\t\tRTT of packet with SN " << a->seqNumber << " : " << manager.StatusMap[a->seqNumber].ackReceivedTime - manager.StatusMap[a->seqNumber].sendingTime << std::endl;
+                        std::cout << "\t\tBASE : " << manager.base << "\tNEXTSN : " << manager.nextSN << "\n" << std::endl;
+                        if ((manager.StatusMap[manager.nextAck].ackReceivedTime-manager.StatusMap[manager.nextAck].sendingTime)>timeOut)
+                            std::cout << "\n\t\t#### timeout "<< manager.nextAck <<"#### "<<manager.StatusMap[a->seqNumber].ackReceivedTime<<std::endl;
+                }else{
+                        //L'ack arrivato non è quello che il mittente si aspettava e viene scartato
+                        std::cout << "\n\t\tError - Wrong ACK --- Expected : " << manager.nextAck << ", Actual : " << a->seqNumber << " -- the ACK will be discarded\n"<< std::endl;
+                }
+
+        }
+        else if (payload.get_command() == Scnsl::Tlm::tlm_command_t(Scnsl::Tlm::CARRIER_COMMAND))
+        {
+        //std::cout << "[" << name() << "]  RECEIVED CARRIER_COMMAND\n";
+        }
+        else
+        {
+        //std::cout << "[" << name() << "]  RECEIVED SOMETHING\n";
+        }
+}

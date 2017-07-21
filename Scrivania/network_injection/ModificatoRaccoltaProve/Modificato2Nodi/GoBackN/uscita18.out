@@ -1,0 +1,324 @@
+
+Local   <-->  Central with FullDuplex channel
+
++----------------------------------------------------------------------------------------------+
+|TASK     ACTION        FROM    TO      DATA    SIZE      SEQUENCE NUMBER       TIME STAMP     |
++----------------------------------------------------------------------------------------------+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 1	(50 us)
+[Local]   SENDING 		To 2	Data %	Size 24	  Sequence Number 2	(192100 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 1	(204050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 1	(204050 us)
+[Central]  RECEIVED 	From 1		Data %	Size 24	  Sequence Number 2	(396100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 2	(396100 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 1	(408050 us)
+
+		RTT of packet with SN 1 : 408050 us
+		BASE : 2	NEXTSN : 3
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 2	(600100 us)
+
+		RTT of packet with SN 2 : 408 ms
+		BASE : 3	NEXTSN : 3
+
+
+		@@@@ timeout 3@@@@
+		nextSNTemp : 7, nextSN : 3
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 3	(600100 us)
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 4	(792150 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 3	(804100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 3	(804100 us)
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 5	(984200 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 4	(996150 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 4	(996150 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 3	(1008100 us)
+
+		RTT of packet with SN 3 : 408 ms
+		BASE : 4	NEXTSN : 6
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 6	(1176250 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 5	(1188200 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 5	(1188200 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 4	(1200150 us)
+
+		RTT of packet with SN 4 : 408 ms
+		BASE : 5	NEXTSN : 7
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 7	(1368300 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 6	(1380250 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 6	(1380250 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 5	(1392200 us)
+
+		RTT of packet with SN 5 : 408 ms
+		BASE : 6	NEXTSN : 8
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 8	(1560350 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 7	(1572300 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 7	(1572300 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 6	(1584250 us)
+
+		RTT of packet with SN 6 : 408 ms
+		BASE : 7	NEXTSN : 9
+
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 8	(1764350 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 8	(1764350 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 7	(1776300 us)
+
+		RTT of packet with SN 7 : 408 ms
+		BASE : 8	NEXTSN : 9
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 8	(1968350 us)
+
+		RTT of packet with SN 8 : 408 ms
+		BASE : 9	NEXTSN : 9
+
+
+		@@@@ timeout 9@@@@
+		nextSNTemp : 13, nextSN : 9
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 9	(1968350 us)
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 10	(2160400 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 9	(2172350 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 9	(2172350 us)
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 11	(2352450 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 10	(2364400 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 10	(2364400 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 9	(2376350 us)
+
+		RTT of packet with SN 9 : 408 ms
+		BASE : 10	NEXTSN : 12
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 12	(2544500 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 11	(2556450 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 11	(2556450 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 10	(2568400 us)
+
+		RTT of packet with SN 10 : 408 ms
+		BASE : 11	NEXTSN : 13
+
+[Local]   SENDING 		To 2	Data '	Size 24	  Sequence Number 13	(2736550 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 12	(2748500 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 12	(2748500 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 11	(2760450 us)
+
+		RTT of packet with SN 11 : 408 ms
+		BASE : 12	NEXTSN : 14
+
+[Local]   SENDING 		To 2	Data ,	Size 24	  Sequence Number 14	(2928600 us)
+[Central]  RECEIVED 	From 1		Data '	Size 24	  Sequence Number 13	(2940550 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 13	(2940550 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 12	(2952500 us)
+
+		RTT of packet with SN 12 : 408 ms
+		BASE : 13	NEXTSN : 15
+
+[Central]  RECEIVED 	From 1		Data ,	Size 24	  Sequence Number 14	(3132600 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 14	(3132600 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 13	(3144550 us)
+
+		RTT of packet with SN 13 : 408 ms
+		BASE : 14	NEXTSN : 15
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 14	(3336600 us)
+
+		RTT of packet with SN 14 : 408 ms
+		BASE : 15	NEXTSN : 15
+
+
+		@@@@ timeout 15@@@@
+		nextSNTemp : 19, nextSN : 15
+
+[Local]   SENDING 		To 2	Data .	Size 24	  Sequence Number 15	(3336600 us)
+[Local]   SENDING 		To 2	Data !	Size 24	  Sequence Number 16	(3528650 us)
+[Central]  RECEIVED 	From 1		Data .	Size 24	  Sequence Number 15	(3540600 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 15	(3540600 us)
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 17	(3720700 us)
+[Central]  RECEIVED 	From 1		Data !	Size 24	  Sequence Number 16	(3732650 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 16	(3732650 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 15	(3744600 us)
+
+		RTT of packet with SN 15 : 408 ms
+		BASE : 16	NEXTSN : 18
+
+[Local]   SENDING 		To 2	Data )	Size 24	  Sequence Number 18	(3912750 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 17	(3924700 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 17	(3924700 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 16	(3936650 us)
+
+		RTT of packet with SN 16 : 408 ms
+		BASE : 17	NEXTSN : 19
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 19	(4104800 us)
+[Central]  RECEIVED 	From 1		Data )	Size 24	  Sequence Number 18	(4116750 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 18	(4116750 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 17	(4128700 us)
+
+		RTT of packet with SN 17 : 408 ms
+		BASE : 18	NEXTSN : 20
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 20	(4296850 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 19	(4308800 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 19	(4308800 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 18	(4320750 us)
+
+		RTT of packet with SN 18 : 408 ms
+		BASE : 19	NEXTSN : 21
+
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 20	(4500850 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 20	(4500850 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 19	(4512800 us)
+
+		RTT of packet with SN 19 : 408 ms
+		BASE : 20	NEXTSN : 21
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 20	(4704850 us)
+
+		RTT of packet with SN 20 : 408 ms
+		BASE : 21	NEXTSN : 21
+
+
+		@@@@ timeout 21@@@@
+		nextSNTemp : 25, nextSN : 21
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 21	(4704850 us)
+[Local]   SENDING 		To 2	Data !	Size 24	  Sequence Number 22	(4896900 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 21	(4908850 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 21	(4908850 us)
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 23	(5088950 us)
+[Central]  RECEIVED 	From 1		Data !	Size 24	  Sequence Number 22	(5100900 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 22	(5100900 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 21	(5112850 us)
+
+		RTT of packet with SN 21 : 408 ms
+		BASE : 22	NEXTSN : 24
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 24	(5281 ms)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 23	(5292950 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 23	(5292950 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 22	(5304900 us)
+
+		RTT of packet with SN 22 : 408 ms
+		BASE : 23	NEXTSN : 25
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 25	(5473050 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 24	(5485 ms)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 24	(5485 ms)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 23	(5496950 us)
+
+		RTT of packet with SN 23 : 408 ms
+		BASE : 24	NEXTSN : 26
+
+[Local]   SENDING 		To 2	Data -	Size 24	  Sequence Number 26	(5665100 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 25	(5677050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 25	(5677050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 24	(5689 ms)
+
+		RTT of packet with SN 24 : 408 ms
+		BASE : 25	NEXTSN : 27
+
+[Central]  RECEIVED 	From 1		Data -	Size 24	  Sequence Number 26	(5869100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 26	(5869100 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 25	(5881050 us)
+
+		RTT of packet with SN 25 : 408 ms
+		BASE : 26	NEXTSN : 27
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 26	(6073100 us)
+
+		RTT of packet with SN 26 : 408 ms
+		BASE : 27	NEXTSN : 27
+
+
+		@@@@ timeout 27@@@@
+		nextSNTemp : 31, nextSN : 27
+
+[Local]   SENDING 		To 2	Data -	Size 24	  Sequence Number 27	(6073100 us)
+[Local]   SENDING 		To 2	Data .	Size 24	  Sequence Number 28	(6265150 us)
+[Central]  RECEIVED 	From 1		Data -	Size 24	  Sequence Number 27	(6277100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 27	(6277100 us)
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 29	(6457200 us)
+[Central]  RECEIVED 	From 1		Data .	Size 24	  Sequence Number 28	(6469150 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 28	(6469150 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 27	(6481100 us)
+
+		RTT of packet with SN 27 : 408 ms
+		BASE : 28	NEXTSN : 30
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 30	(6649250 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 29	(6661200 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 29	(6661200 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 28	(6673150 us)
+
+		RTT of packet with SN 28 : 408 ms
+		BASE : 29	NEXTSN : 31
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 31	(6841300 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 30	(6853250 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 30	(6853250 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 29	(6865200 us)
+
+		RTT of packet with SN 29 : 408 ms
+		BASE : 30	NEXTSN : 32
+
+[Local]   SENDING 		To 2	Data !	Size 24	  Sequence Number 32	(7033350 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 31	(7045300 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 31	(7045300 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 30	(7057250 us)
+
+		RTT of packet with SN 30 : 408 ms
+		BASE : 31	NEXTSN : 33
+
+[Central]  RECEIVED 	From 1		Data !	Size 24	  Sequence Number 32	(7237350 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 32	(7237350 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 31	(7249300 us)
+
+		RTT of packet with SN 31 : 408 ms
+		BASE : 32	NEXTSN : 33
+
+
+		@@@@ timeout 1@@@@
+		nextSNTemp : 5, nextSN : 1
+
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 32	(7441350 us)
+
+		RTT of packet with SN 32 : 408 ms
+		BASE : 33	NEXTSN : 33
+
+
+		@@@@ timeout 33@@@@
+		nextSNTemp : 37, nextSN : 33
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 33	(7441350 us)
+[Local]   SENDING 		To 2	Data -	Size 24	  Sequence Number 34	(7633400 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 33	(7645350 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 33	(7645350 us)
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 35	(7825450 us)
+[Central]  RECEIVED 	From 1		Data -	Size 24	  Sequence Number 34	(7837400 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 34	(7837400 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 33	(7849350 us)
+
+		RTT of packet with SN 33 : 408 ms
+		BASE : 34	NEXTSN : 36
+
+
+Info: /OSCI/SystemC: Simulation stopped by user.

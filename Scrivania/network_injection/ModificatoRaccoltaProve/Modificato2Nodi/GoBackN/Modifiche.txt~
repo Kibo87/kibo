@@ -1,0 +1,155 @@
+Prove di modifica GoBackN:
+Sono in condizione che c'è timeout e la trasmissione di pacchetti è massima per l'intervallo di tempo considerata.
+Ho fissato il timeout a 600; se fosse stato 500, avrei nel mio caso di studio lo stesso numero di pacchetti inviati, ma nel caso in cui dovrei ri-inviare l'intera finestra, ho visto non era sufficiente come tempo.
+utilizzo "diff -s uscita.out uscitaN.out" per confronto diretto se cambia.
+
+Mutetion analisi
+vrappare in una funzione folt, prende parametro di attivazione.
+
+
+1) gbn_manager.cc, riga 8, base(0), da 1 a 0.
+differente, base da 37 a 33, dati corretti.
+2) gbn_manager.cc, riga 10, nextAck(0), da 1 a 0.
+differemte, invia pacchetto iniziale fittizio e meno pacchetti.
+3) gbn_manager.cc, riga 16, nextSNack(0), da 1 a 0.
+differente, meno dati e sbagliati.
+4) gbn_manager.cc, riga 81, da "if((nextSN <= maxSN) && (nextAck < maxSN))" a "if((nextSN <= maxSN))"
+differente, invia dati fittizzi iniziali
+5) gbn_manager.cc, riga 81, da "if((nextSN <= maxSN) && (nextAck < maxSN))" a "if((nextAck < maxSN))"
+differenti, invia dati inesistenti.
+6) gbn_manager.cc, riga 81, da "if((nextSN <= maxSN) && (nextAck < maxSN))" a "if((nextSN < maxSN) && (nextAck < maxSN))"
+sono identici.
+7) gbn_manager.cc, riga 108, da "if (!payloads.empty() && maxSN <= nextSNTemp)" a "if (!payloads.empty())"
+differenti, invia più dati ma non rispetta i controlli di sicurezza
+8) gbn_manager.cc, riga 108, da "if (!payloads.empty() && maxSN <= nextSNTemp)" a "if (!payloads.empty() && maxSN < nextSNTemp)"
+differente, invia meno dati, più lento sopratutto inizialmente.
+9) gbn_manager.cc, riga 244, da "ack->seqNumber = nextSNack-1" a "ack->seqNumber = nextSNack"
+sono identici, non si cade le caso di pacchetti arrivati duplicati
+10) gbn_manager.cc, riga 232, da "ack->sourceId = taskId" a "ack->sourceId = pack->sourceId"
+sono identici, non viene controllato il dato SourceId dell'ack perchè non serve, ma è presente per correttezza e verifica.
+11) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(1500, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+12) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(2000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+13) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(3000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+14) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(4000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+15) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(5000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+16) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(7000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+17)  main.cc, riga 47, csbCh1.delay = sc_core::sc_time(10000, sc_core::SC_US), era 1000.
+inizia a inviare meno dati rispetto al caso precedente nell'intervallo di osservazione.(base a 34)
+18) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(12000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso precedente nell'intervallo di osservazione.(base a 34)
+19) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(20000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso precedente nell'intervallo di osservazione.(base a 34)
+20) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(30000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso precedente nell'intervallo di osservazione.(base a 33)
+21) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(50000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso precedente nell'intervallo di osservazione.(base a 33)
+22) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(500000, sc_core::SC_US), era 1000.
+invia circa la metà dei dati rispetto al caso base (base a 17).
+23) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(800000, sc_core::SC_US), era 1000.
+invia circa la metà dei dati rispetto al caso base (base a 13).
+24) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(600000, sc_core::SC_US), era 1000.
+invia circa la metà dei dati rispetto al caso base (base a 13).
+25) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(100000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 30).
+26) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(90000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 31).
+27) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(80000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 31).
+28) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(70000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 32).
+29) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(60000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 32).
+30) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(1000000, sc_core::SC_US), era 1000.
+invia circa la metà dei dati rispetto al caso base (base a 9)
+31) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(2000000, sc_core::SC_US), era 1000.
+invia circa la metà dei dati rispetto al caso base (base a 4)
+
+---------------------------------------------------------------------------------------------------
+Considero i casi in cui il codice funzionava correttamente e vario il ritardo ai valori cruciali:
+32) il 1) con 7 000 diverso, ma funziona (meno pacchetti a quello con equi ritardo il 16 era 35) 33
+33) il 1) con 20 000 " a quello con equi ritardo il 19 era 34) 32
+34) il 1) con 50 000 " a quello con equi ritardo il 21 era 33) 31
+35) il 1) con 70 000 " a quello con equi ritardo il 28 era 32) 30
+36) il 1) con 90 000 " a quello con equi ritardo il 26 era 31) 29
+37) il 1) con 100 000 " a quello con equi ritardo il 25 era 30) 29
+38) il 1) con 500 000 " a quello con equi ritardo il 22 era 17) 16
+39) il 1) con 800 000 " a quello con equi ritardo il 23 era 13) 12
+40) il 1) con 1 000 000 " a quello con equi ritardo il 30 era 9) 8
+41) il 1) con 2 000 000 " a quello con equi ritardo il 31 era 4) 4
+
+-------------------------
+
+42) il 6) con 7 000 diverso, ma funziona (identico a quello con equi ritardo il 16 era 35) uguale
+43) il 6) con 20 000 " a quello con equi ritardo il 19 era 34) 
+44) il 6) con 50 000 " a quello con equi ritardo il 21 era 33) 
+45) il 6) con 70 000 " a quello con equi ritardo il 28 era 32) 
+46) il 6) con 90 000 " a quello con equi ritardo il 26 era 31) uguale
+47) il 6) con 100 000 " a quello con equi ritardo il 25 era 30) uguale
+48) il 6) con 500 000 "diverso a quello con equi ritardo il 22 era 17) 18
+49) il 6) con 800 000 " a quello con equi ritardo il 23 era 13) 14
+50) il 6) con 1 000 000 " a quello con equi ritardo il 30 era 9) 11
+51) il 6) con 2 000 000 " a quello con equi ritardo il 31 era 4) 6
+
+-------------------------
+
+52) il 8) con 7 000 diverso, ma funziona (meno pacchetti a quello con equi ritardo il 16 era 35) 32
+53) il 8) con 20 000 " a quello con equi ritardo il 19 era 34) 31
+54) il 8) con 50 000 " a quello con equi ritardo il 21 era 33) 30
+55) il 8) con 70 000 " a quello con equi ritardo il 28 era 32) 29
+56) il 8) con 90 000 " a quello con equi ritardo il 26 era 31) 27
+57) il 8) con 100 000 " a quello con equi ritardo il 25 era 30) 27
+58) il 8) con 500 000 " a quello con equi ritardo il 22 era 17) 15
+59) il 8) con 800 000 " a quello con equi ritardo il 23 era 13) 11
+60) il 8) con 1 000 000 " a quello con equi ritardo il 30 era 9) 9
+61) il 8) con 2 000 000 " a quello con equi ritardo il 31 era 4) 5
+
+-------------------------
+
+62) il 9) con 7 000 diverso, ma funziona (meno pacchetti a quello con equi ritardo il 16 era 35) uguale
+63) il 9) con 20 000 " a quello con equi ritardo il 19 era 34) 
+64) il 9) con 50 000 " a quello con equi ritardo il 21 era 33) 
+65) il 9) con 70 000 " a quello con equi ritardo il 28 era 32) 
+66) il 9) con 90 000 " a quello con equi ritardo il 26 era 31)  uguale
+67) il 9) con 100 000 " a quello con equi ritardo il 25 era 30)  uguale
+68) il 9) con 500 000 " a quello con equi ritardo il 22 era 17) 18
+69) il 9) con 800 000 " a quello con equi ritardo il 23 era 13)  14
+70) il 9) con 1 000 000 " a quello con equi ritardo il 30 era 9) 
+71) il 9) con 2 000 000 " a quello con equi ritardo il 31 era 4) 6
+
+-------------------------
+
+72) il 10) con 7 000 diverso, ma funziona (meno pacchetti a quello con equi ritardo il 16 era 35) uguale
+73) il 10) con 20 000 " a quello con equi ritardo il 19 era 34) 
+74) il 10) con 50 000 " a quello con equi ritardo il 21 era 33) 
+75) il 10) con 70 000 " a quello con equi ritardo il 28 era 32) 
+76) il 10) con 90 000 " a quello con equi ritardo il 26 era 31) uguale
+77) il 10) con 100 000 " a quello con equi ritardo il 25 era 30) uguale
+78) il 10) con 500 000 " a quello con equi ritardo il 22 era 17) 
+79) il 10) con 800 000 " a quello con equi ritardo il 23 era 13) uguale
+80) il 10) con 1 000 000 " a quello con equi ritardo il 30 era 9) 
+81) il 10) con 2 000 000 " a quello con equi ritardo il 31 era 4) uguale
+
+-------------------------
+100,150,200,225,275,300,400,500
+82) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(100000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 30).
+83) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(150000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 27).
+84) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(200000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 20).
+85) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(225000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 20).
+86) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(275000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 19).
+87) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(300000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 19).
+88) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(400000, sc_core::SC_US), era 1000.
+invia meno dati rispetto al caso base (base a 19).
+
+

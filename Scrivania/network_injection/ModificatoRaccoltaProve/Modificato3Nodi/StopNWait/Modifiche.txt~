@@ -1,0 +1,141 @@
+Prove di modifica StopNWait:
+Sono in condizione che non c'è timeout
+utilizzo "diff -s uscita.out uscitaN.out"
+
+1) snw_manager.cc,riga 199, if (pack->targetId=taskId), tolgo "==" e metto "=".
+Diverso, non invia dati al secondo nodo.
+2) snw_manager.cc,riga 50, //stop = false, dimentico di mettere lo stop a falso.
+nessun effetto
+3) snw_manager.hh, riga 28, int nextAck = 1, metto a 1 invece che 0.
+risultano diversi
+il nodo uno invia al secondo, ma il secondo poi invia a un nodo inesistente i dati
+4) snw_manager.hh, riga 41, int nextSN = 1, metto a 1 invece che a 0.
+nessun effetto
+5) snw_manager.cc, riga 60, //timeoutOccured = true, mi dimentico di mettere a true
+nessun effetto
+6) snw_manager.cc, riga 114, //sending = false, mi dimentico di mettere a falso
+Local continua a inviare pacchetti senza aspettare ack
+7) snw_manager.cc, riga 33, da "acknowledge->sourceId = taskId" a "acknowledge->sourceId = received.sourceId"
+nessun effetto, perchè non si controlla il mittente dell'ack
+8) snw_manager.cc, riga 82, da"if(sending == true && timeoutOccured == false)" a "if(sending == true)"
+nessun effetto, si manifesta solo con timeout
+9) snw_manager.cc, riga 95, da "packet->seqNumber = received.seqNumber" a "packet->seqNumber = nextSN"
+sequence number rimane sempre 0
+10) snw_manager.hh, riga 26, int seqNumber = 1, metto 1 invece che 0
+sono diversi, ci sono pacchetti sbagliati
+11) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(1200, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+12) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(1300, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+13) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(1500, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+14) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(2000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.
+15) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(3000, sc_core::SC_US), era 1000.
+uguale numero pacchetti inviati, ma in tempi un pò più lunghi.(ultimo ack 19)
+16) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(4000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout.(ultimo ack 9)
+
+17) snw_manager.cc, riga 82, da"if(sending == true && timeoutOccured == false)" a "if(sending != true && timeoutOccured == false)"
+Non funziona
+18) snw_manager.cc, riga 82, da"if(sending == true && timeoutOccured == false)" a "if(sending == true && timeoutOccured != false)"
+Non funziona
+19) snw_manager.cc, riga 82, da"if(sending == true && timeoutOccured == false)" a "if(sending == true || timeoutOccured == false)"
+Diverso, invia il doppio.
+
+20) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(3500, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout.(ultimo ack 9)
+30) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(30000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 9).
+31) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(40000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 8).
+32) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(60000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 8).
+33) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(80000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 7).
+34) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(100000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 7).
+35) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(150000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 6).
+36) main.cc, riga 47, csbCh1.delay = sc_core::sc_time(200000, sc_core::SC_US), era 1000.
+metà del numero pacchetti inviati, come quando abbassavo timeout(da 19esimo ultimo ack ricevuto a 6).
+
+---------------------------------------------------------------------------------------------------
+Considero i casi in cui il codice funzionava correttamente e vario il ritardo ai valori cruciali:
+37) il 4) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15)
+38) il 4) con 40 000 
+39) il 4) con 60 000 
+40) il 4) con 100 000 diverso, ma funziona (identico a quello con equi ritardo il 34)
+41) il 4) con 150 000 
+42) il 4) con 200 000 diverso, ma funziona (identico a quello con equi ritardo il 36)
+-------------------------
+43) il 5) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15)
+44) il 5) con 40 000 diverso, ma funiona? (cambia da quello con equi ritardo il 31) riceve 12
+45) il 5) con 60 000  diverso, ma funziona? (cambia da quello con equi ritardo il 32) riceve 12
+46) il 5) con 100 000 diverso, ma funziona? (cambia da quello con equi ritardo il 34) riceve 12
+47) il 5) con 150 000 diverso, ma funziona? (cambia da quello con equi ritardo il 35) riceve 10
+48) il 5) con 200 000 diverso, ma funziona? (cambia da quello con equi ritardo il 36) riceve 7
+-------------------------
+49) il 1) con 3 000 NON VA
+50) il 1) con 40 000 
+51) il 1) con 60 000 
+52) il 1) con 100 000 NON VA
+53) il 1) con 150 000 
+54) il 1) con 200 000 NON VA
+-------------------------
+55) il 2) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15)
+56) il 2) con 40 000 
+57) il 2) con 60 000 
+58) il 2) con 100 000 diverso, ma funziona (identico a quello con equi ritardo il 34)
+59) il 2) con 150 000 
+60) il 2) con 200 000 diverso, ma funziona (identico a quello con equi ritardo il 36)
+-------------------------
+61) il 7) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15)
+62) il 7) con 40 000 
+63) il 7) con 60 000 
+64) il 7) con 100 000 diverso, ma funziona (identico a quello con equi ritardo il 34)
+65) il 7) con 150 000 
+66) il 7) con 200 000 diverso, ma funziona (identico a quello con equi ritardo il 36)
+-------------------------
+67) il 8) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15)
+68) il 8) con 40 000 diverso, ma funiona? (cambia da quello con equi ritardo il 31) riceve 12
+69) il 8) con 60 000 diverso, ma funziona? (cambia da quello con equi ritardo il 32) riceve 12
+70) il 8) con 100 000 diverso, ma funziona? (cambia da quello con equi ritardo il 34) riceve 12
+71) il 8) con 150 000 diverso, ma funziona? (cambia da quello con equi ritardo il 35) riceve 10
+72) il 8) con 200 000 diverso, ma funziona? (cambia da quello con equi ritardo il 36) riceve 7
+-------------------------
+-------------------------
+Per pacchetto duplicato, ma non arriva pacchetto duplicato
+75) snw_manager.cc, riga 189, faccio "\\ack->type = 'a'"  tolgo intera riga
+identici
+76) il 75) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15) riceve 19
+
+77) il 75) con 40 000 diverso, ma funiona (identico a quello con equi ritardo il 31) riceve 8
+
+78) il 75) con 150 000 diverso, ma funziona (identico a quello con equi ritardo il 35) riceve 6
+identici
+------------------------
+79) snw_manager.cc, riga 190, faccio "//ack->seqNumber = nextSN-1"  tolgo intera riga
+identici
+80) il 79) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15) riceve 19
+
+81) il 79) con 40 000 diverso, ma funiona (identico a quello con equi ritardo il 31) riceve 8
+
+82) il 79) con 150 000 diverso, ma funziona (identico da quello con equi ritardo il 35) riceve 6
+identici
+-------------------------
+83) snw_manager.cc, riga 207, faccio "//payloads.push(*pack)"  tolgo intera riga
+diverso, non inoltra pacchetti al terzo nodo
+84) il 83) con 3 000 diverso, ma funziona (identico a quello con equi ritardo il 15) riceve 19
+
+85) il 83) con 40 000 diverso, ma funiona (identico a quello con equi ritardo il 31) riceve 8
+
+86) il 83) con 150 000 diverso, ma funziona (identico da quello con equi ritardo il 35) riceve 6
+
+
+Considerazioni:
+1) se mi metto in una condizione di lavoro standard e quasi ideale in cui sono presenti solo due nodi e il timeout è superiore al tempo di trasmissione è difficile avere una copertura di tutto il codice.
+Infatti molte condizioni e porzioni del codice sono presenti solo per gestire casi particolari ed eccezioni di funzionamento.
+2) generalmente le modiche apportate al codice che dovrebbero simulare un guasto Sw o un errore di programmazione, data la natura stessa del funzionamento del protocollo, portano a situazioni in cui non si avverte modifica delle uscite o il protocollo non funziona completamente.
+3) probabilmente anche dovuto al fatto della semplicità del protocollo stop and wait in esame, è difficile simulare guasti che possano comportare la perdita solo di alcuni pacchetti o dei ritardi maggiori nelle trasmissioni guastando il Sw inveche che creando un'intera situazione ad hoc.
+4) modificare il delay del canale, porta a un comportamento simile alla riduzione del timeout tollerato dal protocollo.

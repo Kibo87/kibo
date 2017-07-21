@@ -1,0 +1,256 @@
+
+Local   <-->  Central with FullDuplex channel
+
++----------------------------------------------------------------------------------------------+
+|TASK     ACTION        FROM    TO      DATA    SIZE      SEQUENCE NUMBER       TIME STAMP     |
++----------------------------------------------------------------------------------------------+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 0	(50 us)
+
+##### TIMEOUT 390100 us ############
+##### resend packet with SN : 0 #####
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 0	(390100 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 0	(392050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 0	(392050 us)
+
+##### TIMEOUT 780150 us ############
+##### resend packet with SN : 0 #####
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 0	(780150 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 0	(782100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 0	(782100 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 0	(784050 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data %	Size 24	  Sequence Number 1	(972200 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 0	(1172150 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 0	(1172150 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 1362250 us ############
+##### resend packet with SN : 1 #####
+
+
+[Local]   SENDING 		To 2	Data %	Size 24	  Sequence Number 1	(1362250 us)
+[Central]  RECEIVED 	From 1		Data %	Size 24	  Sequence Number 1	(1364200 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 1	(1364200 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 1752300 us ############
+##### resend packet with SN : 1 #####
+
+
+[Local]   SENDING 		To 2	Data %	Size 24	  Sequence Number 1	(1752300 us)
+[Central]  RECEIVED 	From 1		Data %	Size 24	  Sequence Number 1	(1754250 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 1	(1754250 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 1	(1756200 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 2	(1944350 us)
+[Central]  RECEIVED 	From 1		Data %	Size 24	  Sequence Number 1	(2144300 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 1	(2144300 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 2334400 us ############
+##### resend packet with SN : 2 #####
+
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 2	(2334400 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 2	(2336350 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 2	(2336350 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 2724450 us ############
+##### resend packet with SN : 2 #####
+
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 2	(2724450 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 2	(2726400 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 2	(2726400 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 2	(2728350 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 3	(2916500 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 2	(3116450 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 2	(3116450 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 3306550 us ############
+##### resend packet with SN : 3 #####
+
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 3	(3306550 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 3	(3308500 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 3	(3308500 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 3696600 us ############
+##### resend packet with SN : 3 #####
+
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 3	(3696600 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 3	(3698550 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 3	(3698550 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 3	(3700500 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 4	(3888650 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 3	(4088600 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 3	(4088600 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 4278700 us ############
+##### resend packet with SN : 4 #####
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 4	(4278700 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 4	(4280650 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 4	(4280650 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 4668750 us ############
+##### resend packet with SN : 4 #####
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 4	(4668750 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 4	(4670700 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 4	(4670700 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 4	(4672650 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 5	(4860800 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 4	(5060750 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 4	(5060750 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 5250850 us ############
+##### resend packet with SN : 5 #####
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 5	(5250850 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 5	(5252800 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 5	(5252800 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 5640900 us ############
+##### resend packet with SN : 5 #####
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 5	(5640900 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 5	(5642850 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 5	(5642850 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 5	(5644800 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 6	(5832950 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 5	(6032900 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 5	(6032900 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 6223 ms ############
+##### resend packet with SN : 6 #####
+
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 6	(6223 ms)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 6	(6224950 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 6	(6224950 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 6613050 us ############
+##### resend packet with SN : 6 #####
+
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 6	(6613050 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 6	(6615 ms)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 6	(6615 ms)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 6	(6616950 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 7	(6805100 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 6	(7005050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 6	(7005050 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 7195150 us ############
+##### resend packet with SN : 7 #####
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 7	(7195150 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 7	(7197100 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 7	(7197100 us)
+
+                RTT : 201900 us
+
+
+##### TIMEOUT 7585200 us ############
+##### resend packet with SN : 7 #####
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 7	(7585200 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 7	(7587150 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 7	(7587150 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 7	(7589100 us)
+
+                        RTT : 3900 us
+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 8	(7777250 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 7	(7977200 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 7	(7977200 us)
+
+                RTT : 201900 us
+
+
+Info: /OSCI/SystemC: Simulation stopped by user.

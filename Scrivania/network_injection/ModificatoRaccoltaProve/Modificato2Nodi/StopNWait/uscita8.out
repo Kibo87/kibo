@@ -1,0 +1,193 @@
+
+Local   <-->  Central with FullDuplex channel
+
++----------------------------------------------------------------------------------------------+
+|TASK     ACTION        FROM    TO      DATA    SIZE      SEQUENCE NUMBER       TIME STAMP     |
++----------------------------------------------------------------------------------------------+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 0	(50 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 0	(193050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 0	(193050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 0	(386050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data %	Size 24	  Sequence Number 1	(386050 us)
+[Central]  RECEIVED 	From 1		Data %	Size 24	  Sequence Number 1	(579050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 1	(579050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 1	(772050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data *	Size 24	  Sequence Number 2	(772050 us)
+[Central]  RECEIVED 	From 1		Data *	Size 24	  Sequence Number 2	(965050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 2	(965050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 2	(1158050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 3	(1158050 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 3	(1351050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 3	(1351050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 3	(1544050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 4	(1544050 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 4	(1737050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 4	(1737050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 4	(1930050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 5	(1930050 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 5	(2123050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 5	(2123050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 5	(2316050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 6	(2316050 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 6	(2509050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 6	(2509050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 6	(2702050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 7	(2702050 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 7	(2895050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 7	(2895050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 7	(3088050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data "	Size 24	  Sequence Number 8	(3088050 us)
+[Central]  RECEIVED 	From 1		Data "	Size 24	  Sequence Number 8	(3281050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 8	(3281050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 8	(3474050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 9	(3474050 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 9	(3667050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 9	(3667050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 9	(3860050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 10	(3860050 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 10	(4053050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 10	(4053050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 10	(4246050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data &	Size 24	  Sequence Number 11	(4246050 us)
+[Central]  RECEIVED 	From 1		Data &	Size 24	  Sequence Number 11	(4439050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 11	(4439050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 11	(4632050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data '	Size 24	  Sequence Number 12	(4632050 us)
+[Central]  RECEIVED 	From 1		Data '	Size 24	  Sequence Number 12	(4825050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 12	(4825050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 12	(5018050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data ,	Size 24	  Sequence Number 13	(5018050 us)
+[Central]  RECEIVED 	From 1		Data ,	Size 24	  Sequence Number 13	(5211050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 13	(5211050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 13	(5404050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data .	Size 24	  Sequence Number 14	(5404050 us)
+[Central]  RECEIVED 	From 1		Data .	Size 24	  Sequence Number 14	(5597050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 14	(5597050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 14	(5790050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data !	Size 24	  Sequence Number 15	(5790050 us)
+[Central]  RECEIVED 	From 1		Data !	Size 24	  Sequence Number 15	(5983050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 15	(5983050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 15	(6176050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data +	Size 24	  Sequence Number 16	(6176050 us)
+[Central]  RECEIVED 	From 1		Data +	Size 24	  Sequence Number 16	(6369050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 16	(6369050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 16	(6562050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data )	Size 24	  Sequence Number 17	(6562050 us)
+[Central]  RECEIVED 	From 1		Data )	Size 24	  Sequence Number 17	(6755050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 17	(6755050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 17	(6948050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 18	(6948050 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 18	(7141050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 18	(7141050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 18	(7334050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data #	Size 24	  Sequence Number 19	(7334050 us)
+[Central]  RECEIVED 	From 1		Data #	Size 24	  Sequence Number 19	(7527050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 19	(7527050 us)
+[Local]   RECEIVED 	From 2		ACK 	Size 24	  Sequence Number 19	(7720050 us)
+
+                        RTT : 386 ms
+
+
+
+[Local]   SENDING 		To 2	Data $	Size 24	  Sequence Number 20	(7720050 us)
+[Central]  RECEIVED 	From 1		Data $	Size 24	  Sequence Number 20	(7913050 us)
+[Central]  SENDING 		To 1	ACK 	Size 24	  Sequence Number 20	(7913050 us)
+
+Info: /OSCI/SystemC: Simulation stopped by user.
